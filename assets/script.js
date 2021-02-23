@@ -28,21 +28,23 @@ $('#currentDay').text(currentDay);
 //create table structure
 
 //user input will be stored and recalled from storedPlans array
-let storedPlans = JSON.parse(localStorage.getItem("storedPlans", storedPlans)) || [];
+// let storedPlans = JSON.parse(localStorage.getItem("storedPlans", storedPlans)) || [];
 
-//create row for each hour
-var sum = 0;
-var planArr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+//runs functions on page load 
 
-// //use planArr to construct a table
-// function buildTable() {
-//     $.each(planArr, function() {
-//         //add a row to planTable for each hour
 
-//     })
-// }
 
-//time column
+//hour column (each hour from 9-5 gets a column);
+let currentHour = moment(9:00am);
+
+function setHour() {
+    for(var i = 9; i<=17; i++) {
+        currentHour.add(moment.duration(1, 'h'));
+    }
+    $('.hour').text(currentHour)
+}
+
+setHour();
 
 //input column
 
