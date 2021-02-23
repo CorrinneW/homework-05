@@ -34,13 +34,13 @@ let storedPlans = JSON.parse(localStorage.getItem("storedPlans", storedPlans)) |
 var sum = 0;
 var planArr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-//use planArr to construct a table
-function buildTable() {
-    $.each(planArr, function() {
-        //add a row to planTable for each hour
+// //use planArr to construct a table
+// function buildTable() {
+//     $.each(planArr, function() {
+//         //add a row to planTable for each hour
 
-    })
-}
+//     })
+// }
 
 //time column
 
