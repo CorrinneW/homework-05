@@ -19,27 +19,25 @@
     //use bootstrap icon for the button
 
 
-
 //currentDay updates with weekday name and date @ top of page.
 let currentDay = moment().format('dddd, MMMM Do')
 //populate #currentDay using moment.js
 $('#currentDay').text(currentDay);
 
-//start table code
+//start planner code
+
+//set each planner row to an array
+const rowArray = $('.row').toArray();
+
 //hour column
 const currentHour = moment().format('HH'); //live time
-console.log(currentHour);
 
 let tableHour = 09; //table starts at 9am
-
-//defines a length to iterate over
-const totalRows = $('.row').length;
-console.log(totalRows);
 
 //input column - changes color based on whether task is past, future or present
 function taskStatus() {
     //iterates through each row (0-9)...color defaults to future 
-    for(var i = 0; i < totalRows; i++) {
+    for(var i = 0; i < rowArray[i]; i++) {
         if (tableHour === currentHour) {
             $('textarea').removeClass('.future').addClass('.present')
         } else if (tableHour < currentHour) {
@@ -47,7 +45,15 @@ function taskStatus() {
         } else {
             $('textarea').addClass('.future')
         }
+        nextRow()
+    }
+    console.log(tableHour)
+}
 
+function nextRow() {
+    while (tableHour <= rowArray.length) {
+        tableHour++
+        taskStatus();
     }
 }
 
@@ -57,10 +63,12 @@ taskStatus();
 const savedTasks = JSON.parse(localStorage.getItem('userTasks')) || []; //empty array which holds saved tasks in local Storage
 
 $('.saveBtn').on("click", function() {
-    if ($('textarea') === '') {
+    let userTask = $('textarea').val();
+
+    if (userTask === "") {
         alert("No task to save!");
     } else {
-        let userTask = $('textarea').text;
+        console.log(userTask);
 
         savedTasks.push(userTask);
         localStorage.setItem('userTask', JSON.stringify(savedTasks));
