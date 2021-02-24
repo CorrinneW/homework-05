@@ -5,10 +5,9 @@ body {
 }
 
 textarea{
-  width: 100%;
   background: transparent;
   border: none;
-  resize: both;
+  resize: none;
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
@@ -31,24 +30,16 @@ textarea{
   border-radius: 15px;
 }
 
-table {
-  width: 100%;
-}
-
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top: 1px solid white;;
 }
 
 .hour {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
-  text-align: right;
-  padding-top: 20px;
 }
 
 .past {
@@ -72,12 +63,6 @@ table {
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
-}
-
-.saveBtn {
-  text-align: center;
-  /*vertically center button icon by setting padding to half of total row height*/
-  padding-top: 40px;
 }
 
 .saveBtn i:hover {

@@ -20,35 +20,51 @@
 
 
 
-//currentDay updates with weekday name and date.
-var currentDay = moment().format('dddd, MMMM Do')
+//currentDay updates with weekday name and date @ top of page.
+let currentDay = moment().format('dddd, MMMM Do')
 //populate #currentDay using moment.js
 $('#currentDay').text(currentDay);
 
-//create table structure
+//start table code
+//hour column
+let currentHour = moment().format('LT'); //live time
+console.log(currentHour);
 
-//user input will be stored and recalled from storedPlans array
-// let storedPlans = JSON.parse(localStorage.getItem("storedPlans", storedPlans)) || [];
+let tableHour = moment().hour(9).format('LT'); //table starts at 9am
+console.log(tableHour);
 
-//runs functions on page load 
-
-
-
-//hour column (each hour from 9-5 gets a column);
-let currentHour = moment(9:00am);
-
+//defines time span for each hour cell (ie 10AM = 10:00-10:59);
 function setHour() {
-    for(var i = 9; i<=17; i++) {
-        currentHour.add(moment.duration(1, 'h'));
-    }
-    $('.hour').text(currentHour)
+    //for each row, add a time range with momentjs
+    $('.container > .hour').each(function(i) {
+        //while between the hours of 9 and 5
+        while (currentHour >= moment().hour(9) && currentHour <= moment().hour(17)) {
+            //set a duration of 1hr per row
+            i = moment.duration(1, 'hours');
+        }
+    })
 }
 
-setHour();
+// setHour();
 
-//input column
+//input column - changes color based on whether task is past, current or present
+let taskStatus = document.querySelector("textarea");
 
-//save column
+function getStatus() {
+    //if (time text < moment().format('LT'))
+}
+
+
+//save column - saves user input on click.
+
+
+
+// let currentHour = moment().format('LT');
+
+// for(var i = 0; i<=8; i++) {
+//     currentHour += moment.duration().hours(1);
+//     $('.hour').text(currentHour)
+// }
 
 
 
