@@ -27,44 +27,49 @@ $('#currentDay').text(currentDay);
 
 //start table code
 //hour column
-let currentHour = moment().format('LT'); //live time
+const currentHour = moment().format('HH'); //live time
 console.log(currentHour);
 
-let tableHour = moment().hour(9).format('LT'); //table starts at 9am
-console.log(tableHour);
+let tableHour = 09; //table starts at 9am
 
-//defines time span for each hour cell (ie 10AM = 10:00-10:59);
-function setHour() {
-    //for each row, add a time range with momentjs
-    $('.container > .hour').each(function(i) {
-        //while between the hours of 9 and 5
-        while (currentHour >= moment().hour(9) && currentHour <= moment().hour(17)) {
-            //set a duration of 1hr per row
-            i = moment.duration(1, 'hours');
+//defines a length to iterate over
+const totalRows = $('.row').length;
+console.log(totalRows);
+
+//input column - changes color based on whether task is past, future or present
+function taskStatus() {
+    //iterates through each row (0-9)...color defaults to future 
+    for(var i = 0; i < totalRows; i++) {
+        if (tableHour === currentHour) {
+            $('textarea').removeClass('.future').addClass('.present')
+        } else if (tableHour < currentHour) {
+            $('textarea').removeClass('.present').addClass('.past')
+        } else {
+            $('textarea').addClass('.future')
         }
-    })
+
+    }
 }
 
-// setHour();
-
-//input column - changes color based on whether task is past, current or present
-let taskStatus = document.querySelector("textarea");
-
-function getStatus() {
-    //if (time text < moment().format('LT'))
-}
-
+taskStatus();
 
 //save column - saves user input on click.
+const savedTasks = JSON.parse(localStorage.getItem('userTasks')) || []; //empty array which holds saved tasks in local Storage
+
+$('.saveBtn').on("click", function() {
+    if ($('textarea') === '') {
+        alert("No task to save!");
+    } else {
+        let userTask = $('textarea').text;
+
+        savedTasks.push(userTask);
+        localStorage.setItem('userTask', JSON.stringify(savedTasks));
+    }
+})
 
 
 
-// let currentHour = moment().format('LT');
 
-// for(var i = 0; i<=8; i++) {
-//     currentHour += moment.duration().hours(1);
-//     $('.hour').text(currentHour)
-// }
 
 
 
