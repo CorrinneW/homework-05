@@ -32,12 +32,14 @@ const rowArray = $('.row').toArray();
 //hour column
 const currentHour = moment().format('HH'); //live time
 
-let tableHour = 09; //table starts at 9am
+let tableHour = moment().hour(9).format('HH'); //table starts at 9am
+
+let currentRow = 0; //
 
 //input column - changes color based on whether task is past, future or present
 function taskStatus() {
     //iterates through each row (0-9)...color defaults to future 
-    for(var i = 0; i < rowArray[i]; i++) {
+    for(var i = 0; i < rowArray[currentRow].length; i++) {
         if (tableHour === currentHour) {
             $('textarea').removeClass('.future').addClass('.present')
         } else if (tableHour < currentHour) {
@@ -45,14 +47,16 @@ function taskStatus() {
         } else {
             $('textarea').addClass('.future')
         }
-        nextRow()
+        nextRow();
     }
     console.log(tableHour)
 }
 
+//moves up to the next row and adds an hour to tableHour
 function nextRow() {
-    while (tableHour <= rowArray.length) {
-        tableHour++
+    while (currentRow <= rowArray.length) {
+        currentRow++;
+        tableHour += moment.duration(1, "hours");
         taskStatus();
     }
 }
