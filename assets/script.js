@@ -5,37 +5,47 @@ $('#currentDay').text(currentDay);
 
 //start planner code
 
-//set each planner column to an array
-const hourArray = $('.hour').toArray();
-console.log(hourArray);
-
-const inputArray = $('textarea').toArray();
-console.log(inputArray);
-
-const btnArray = $('.saveBtn').toArray();
-console.log(btnArray);
-
+//set each planner row to an array
 const rowArray = $('.row').toArray();
+
+var container = document.querySelector(".container")
+
+let index = 0;
+
+//every time a click happens, the index of the row is set to index
+//idx will be used to inform checkTask and storeTask functions
+//"i < container.children.length" constrains i to only the contents of the selected row.
+for (var i = 0; i < container.children.length; i++) {
+    //self-invoking function waits for one of the container's children to be clicked and then sets the index of that child to the variable "index"
+    (function(i) {
+        container.children[i].onclick = function() {
+            index = i;
+            console.log(index);
+        }
+    })(i);
+    //i calls the function
+}
 
 //save column - saves user input on click.
 //retrieves stored data or sets an empty array
 var savedTasks = JSON.parse(localStorage.getItem('userTask')) || []; 
-
+let userTask = $('textarea').val();
 //need to treat each row as a separate entity from other rows.
-for(var i = 0; i < rowArray.length; i++){
-    $('.saveBtn').click(function () {
-        //interact only with textarea in current index
-        console.log($('textarea').eq(i).val());
-    
+$('.saveBtn').click(function checkTask() {
+    //for rowArray index of clicked...
+    for (index of rowArray) {
         if (userTask === "") {
             alert("No task to save!");
         } else {
-            console.log(userTask);
-    
-            savedTasks.push(userTask);
-            localStorage.setItem('userTask', JSON.stringify(savedTasks));
+            storeTask();
         };
-    })
+    }
+})
+
+function storeTask() {
+    savedTasks.push(userTask);
+    localStorage.setItem('userTask', JSON.stringify(savedTasks));
+    checkTask();
 }
 
 // //hour column
