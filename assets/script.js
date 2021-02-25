@@ -10,20 +10,28 @@ let userTask = '' //sets global variable for current task
 //retrieves stored data or sets an empty array
 var savedTasks = JSON.parse(localStorage.getItem('userTask', savedTasks)) || []; 
 //set each planner row to an array
-const rowArray = $('.row').toArray();
+var txtArray = $('textarea').toArray();
 
-let txtIndex = 0;
-
-let btnIndex = 0;
+let index = 0;
 
 //using index of both the textarea and the button to specify which task to save
-$('textarea').click(function () {
-    txtIndex = $('textarea').index(this);
+$('.saveBtn').click(function () {
+    usertask = ''
+    index = $('.saveBtn').index(this);
+    console.log(index);
+
+    //if textarea.index
+    if (txtArray[index].value === '') {
+        alert("No task to save!");
+        console.log(txtArray[index].value)
+    } else {
+        userTask = txtArray[index].value;
+        savedTasks.push(userTask);
+        localStorage.setItem('userTask', JSON.stringify(savedTasks));
+    }
 })
 
-$('.saveBtn').click(function () {
-    btnIndex = $('.saveBtn').index(this);
-})
+
 
 // //need to treat each row as a separate entity from other rows.
 // $('.saveBtn').click(function () {
@@ -47,10 +55,7 @@ $('.saveBtn').click(function () {
 //     // }
 // }
 
-// function storeTask() {
-//     savedTasks.push(userTask);
-//     localStorage.setItem('userTask', JSON.stringify(savedTasks));
-// }
+
 
 // //hour column
 // const liveHour = moment().format('HH'); //live time
