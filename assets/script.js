@@ -5,48 +5,52 @@ $('#currentDay').text(currentDay);
 
 //start planner code
 
+//save column - saves user input on click.
+let userTask = '' //sets global variable for current task
+//retrieves stored data or sets an empty array
+var savedTasks = JSON.parse(localStorage.getItem('userTask', savedTasks)) || []; 
 //set each planner row to an array
 const rowArray = $('.row').toArray();
 
-var container = document.querySelector(".container")
+let txtIndex = 0;
 
-let index = 0;
+let btnIndex = 0;
 
-//every time a click happens, the index of the row is set to index
-//idx will be used to inform checkTask and storeTask functions
-//"i < container.children.length" constrains i to only the contents of the selected row.
-for (var i = 0; i < container.children.length; i++) {
-    //self-invoking function waits for one of the container's children to be clicked and then sets the index of that child to the variable "index"
-    (function(i) {
-        container.children[i].onclick = function() {
-            index = i;
-            console.log(index);
-        }
-    })(i);
-    //i calls the function
-}
-
-//save column - saves user input on click.
-//retrieves stored data or sets an empty array
-var savedTasks = JSON.parse(localStorage.getItem('userTask')) || []; 
-let userTask = $('textarea').val();
-//need to treat each row as a separate entity from other rows.
-$('.saveBtn').click(function checkTask() {
-    //for rowArray index of clicked...
-    for (index of rowArray) {
-        if (userTask === "") {
-            alert("No task to save!");
-        } else {
-            storeTask();
-        };
-    }
+//using index of both the textarea and the button to specify which task to save
+$('textarea').click(function () {
+    txtIndex = $('textarea').index(this);
 })
 
-function storeTask() {
-    savedTasks.push(userTask);
-    localStorage.setItem('userTask', JSON.stringify(savedTasks));
-    checkTask();
-}
+$('.saveBtn').click(function () {
+    btnIndex = $('.saveBtn').index(this);
+})
+
+// //need to treat each row as a separate entity from other rows.
+// $('.saveBtn').click(function () {
+//     checkTask();
+// })
+
+// function checkTask() {
+//     //if task at selected index is blank, alert user, else store task
+//     userTask = 
+//     // for (index of container.children) {
+//     //     userTask = $('textarea').val();
+
+//     //     if (userTask === "") {
+//     //         alert("No task to save!");
+//     //         break;
+//     //     } else {
+//     //         storeTask();
+//     //         userTask = '';
+//     //         break;
+//     //     };
+//     // }
+// }
+
+// function storeTask() {
+//     savedTasks.push(userTask);
+//     localStorage.setItem('userTask', JSON.stringify(savedTasks));
+// }
 
 // //hour column
 // const liveHour = moment().format('HH'); //live time
