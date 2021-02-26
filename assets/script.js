@@ -39,56 +39,22 @@ $('.saveBtn').click(function () {
 savedTasks.forEach(task =>{$(txtArray[task.index]).val(task.value)})
 
 
+//hour column
+var hrArray = $('.hour').toArray(); //array of each cell in hour column
 
-// //need to treat each row as a separate entity from other rows.
-// $('.saveBtn').click(function () {
-//     checkTask();
-// })
+const liveHour = moment().format('HH'); //live time
 
-// function checkTask() {
-//     //if task at selected index is blank, alert user, else store task
-//     userTask = 
-//     // for (index of container.children) {
-//     //     userTask = $('textarea').val();
+//for each element of hrArray, tableHour 
+hrArray.forEach(function(hour, index) {
+    hour = moment().hour(9).add(index, 'hours').hours() //starts at 9(am) and ends at 17(5pm)
+    
+    if(hour===liveHour) {
+        $(txtArray[index]).addClass('.present')
+    } else if (hour < liveHour) {
+        $(txtArray[index]).addClass('.past')
+    } else {
+        $(txtArray[index]).addClass('.future')
+    }
+})
 
-//     //     if (userTask === "") {
-//     //         alert("No task to save!");
-//     //         break;
-//     //     } else {
-//     //         storeTask();
-//     //         userTask = '';
-//     //         break;
-//     //     };
-//     // }
-// }
-
-
-
-// //hour column
-// const liveHour = moment().format('HH'); //live time
-// console.log(liveHour);
-
-// let tableHour = moment().hour(9).format('HH'); //table hour is static and iterates from 9-17
-// console.log(tableHour);
-
-// let currentRow = 0; //
-
-// //input column - changes color based on whether task is past, future or present
-// function taskStatus() {
-//     //iterates through each row (0-9)...color defaults to future 
-//     for(var i = 0; i < rowArray.length; i++) {
-//         if (tableHour === liveHour) {
-//             $('textarea').addClass('.present')
-//         } else if (tableHour < liveHour) {
-//             $('textarea').addClass('.past')
-//         } else {
-//             $('textarea').addClass('.future')
-//         }
-//         currentRow++
-//     }
-//     console.log(currentRow);
-//     console.log(tableHour);
-// }
-
-// taskStatus();
 
