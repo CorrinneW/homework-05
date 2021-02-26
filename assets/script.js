@@ -46,14 +46,16 @@ const liveHour = moment().format('HH'); //live time
 
 //for each element of hrArray, tableHour 
 hrArray.forEach(function(hour, index) {
-    hour = moment().hour(9).add(index, 'hours').hours() //starts at 9(am) and ends at 17(5pm)
-    
+    hour = moment().hour(9).add(index, 'hours').hours()//starts at 9(am) and ends at 17(5pm)
+    h = hour.toString();
+    console.log(h);
+    console.log(liveHour);
     if(hour===liveHour) {
-        $(txtArray[index]).addClass('.present')
+        console.log('present');
     } else if (hour < liveHour) {
-        $(txtArray[index]).addClass('.past')
+        console.log('past');
     } else {
-        $(txtArray[index]).addClass('.future')
+        console.log('future');
     }
 })
 
