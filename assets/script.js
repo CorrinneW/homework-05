@@ -8,28 +8,35 @@ $('#currentDay').text(currentDay);
 //save column - saves user input on click.
 let userTask = '' //sets global variable for current task
 //retrieves stored data or sets an empty array
-var savedTasks = JSON.parse(localStorage.getItem('userTask', savedTasks)) || []; 
-//set each planner row to an array
+var savedTasks = JSON.parse(localStorage.getItem('userTask')) || []; 
+
+//set textareas to an array which will be referenced when .saveBtn is clicked
 var txtArray = $('textarea').toArray();
 
 let index = 0;
 
-//using index of both the textarea and the button to specify which task to save
+//uses index of the button to specify which task to save
 $('.saveBtn').click(function () {
-    usertask = ''
+    //assigns the clicked button's index to the index variable
     index = $('.saveBtn').index(this);
-    console.log(index);
 
-    //if textarea.index
+    //references the textarea that corresponds with the button
     if (txtArray[index].value === '') {
         alert("No task to save!");
-        console.log(txtArray[index].value)
     } else {
-        userTask = txtArray[index].value;
+        //assigns an object with the user's input and its current index
+        userTask = {
+            index: index,
+            value: txtArray[index].value
+        }
         savedTasks.push(userTask);
         localStorage.setItem('userTask', JSON.stringify(savedTasks));
     }
 })
+
+//on refresh/page load returns each task to its original textarea
+//creates a jquery object using each object's value and assigns it to the corresponding index in txtArray
+savedTasks.forEach(task =>{$(txtArray[task.index]).val(task.value)})
 
 
 
