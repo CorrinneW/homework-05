@@ -44,18 +44,21 @@ var hrArray = $('.hour').toArray(); //array of each cell in hour column
 
 const liveHour = moment().format('HH'); //live time
 
-//for each element of hrArray, tableHour 
+//for each element of hrArray, hour is checked against liveHour and past, present or future class is added
 hrArray.forEach(function(hour, index) {
     hour = moment().hour(9).add(index, 'hours').hours()//starts at 9(am) and ends at 17(5pm)
+    
+    //converted hour to string b/c it returns a number while liveHour returns string
     h = hour.toString();
-    console.log(h);
-    console.log(liveHour);
-    if(hour===liveHour) {
-        console.log('present');
-    } else if (hour < liveHour) {
-        console.log('past');
+    cell = txtArray[index] 
+
+    //controls the background color of each textarea depending on the current time
+    if (hour < liveHour) {
+        $(cell).addClass('past')
+    } else if (hour > liveHour) {
+        $(cell).addClass('future')
     } else {
-        console.log('future');
+        $(cell).addClass('present')
     }
 })
 
