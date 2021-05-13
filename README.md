@@ -20,3 +20,9 @@ A clean, efficient and dynamically updated application built on moment.js and jq
 https://corrinnew.github.io/workday-planner/
 
 ![Work-Day-Scheduler.PNG](https://github.com/CorrinneW/workday-planner/blob/main/assets/images/Work-Day-Scheduler.png)
+
+
+## License
+
+MIT License
+![test](https://img.shields.io/apm/l/test)
